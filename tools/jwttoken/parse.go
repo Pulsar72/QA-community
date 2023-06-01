@@ -1,8 +1,8 @@
 package jwttoken
 
 import (
+	"QA_community/global"
 	"QA_community/model"
-	"QA_community/tools/middleware"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 )
@@ -10,7 +10,7 @@ import (
 // 解析Token
 func ParseToken(tokenString string) (*model.MyClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &model.MyClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return middleware.SecretSignKey, nil
+		return global.SecretSignKey, nil
 	})
 	if err != nil {
 		return nil, err

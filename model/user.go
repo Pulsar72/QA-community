@@ -7,18 +7,18 @@ type User struct {
 	UserName    string `form:"username"  json:"username" binding:"required"`
 	Email       string `form:"email" json:"email" binding:"required"`
 	Password    string `form:"password" json:"password" binding:"required"`
-	PhoneNumber uint   `form:"phonenumber" json:"phonenumber" binding:"required"`
+	PhoneNumber string `form:"phonenumber" json:"phonenumber" binding:"required"`
 }
 
 type UserRegister struct {
 	UserName    string `form:"username"  json:"username" binding:"required"`
 	Password    string `form:"password" json:"password" binding:"required"`
 	Email       string `form:"email" json:"email" binding:"required"`
-	PhoneNumber uint   `form:"phonenumber" json:"phonenumber" binding:"required"`
+	PhoneNumber string `form:"phonenumber" json:"phonenumber" binding:"required"`
 }
 
 type PhoneLogin struct {
-	PhoneNumber uint   `form:"phonenumber" json:"phonenumber" binding:"required"`
+	PhoneNumber string `form:"phonenumber" json:"phonenumber" binding:"required"`
 	Password    string `form:"password" json:"password" binding:"required"`
 }
 

@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-var SecretSignKey = []byte("pulsar")
-
 func AuthMiddleWare() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		authHeader := c.Request.Header.Get("Authorization")

@@ -1,8 +1,8 @@
 package jwttoken
 
 import (
+	"QA_community/global"
 	"QA_community/model"
-	"QA_community/tools/middleware"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
@@ -17,7 +17,7 @@ func CreateToken(username string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(middleware.SecretSignKey)
+	tokenString, err := token.SignedString(global.SecretSignKey)
 	if err != nil {
 		fmt.Println("token生成失败")
 		return "", err

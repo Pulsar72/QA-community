@@ -56,12 +56,14 @@ func UserRegister(c *gin.Context) {
 		return
 	}
 	//存入数据库
-	global.GlobalDb.Model(&model.User{}).Create(&model.User{
+	var user model.User
+	user = model.User{
 		UserName:    registerform.UserName,
 		Password:    registerform.Password,
 		Email:       registerform.Email,
 		PhoneNumber: registerform.PhoneNumber,
-	})
+	}
+	global.GlobalDb.Model(&model.User{}).Create(&user)
 	checkresponse.ResSuccess(c, "注册成功")
 }
 
@@ -75,7 +77,7 @@ func PhoneNumberLogin(c *gin.Context) {
 	//检查手机号是否存在
 	flag := dao.CheckPhoneNumber(loginform.PhoneNumber)
 	if flag {
-		checkresponse.ResFail(c, "手机号已存在")
+		checkresponse.ResFail(c, "手机号不存在")
 		return
 	}
 	//密码验证
@@ -105,7 +107,7 @@ func EmailLogin(c *gin.Context) {
 	//检查邮箱是否存在
 	flag := dao.CheckEmail(loginform.Email)
 	if flag {
-		checkresponse.ResFail(c, "手机号已存在")
+		checkresponse.ResFail(c, "邮箱不存在")
 		return
 	}
 	//密码验证
@@ -135,7 +137,7 @@ func UserNameLogin(c *gin.Context) {
 	//检查用户名是否存在
 	flag := dao.CheckUserName(loginform.UserName)
 	if flag {
-		checkresponse.ResFail(c, "用户名已存在")
+		checkresponse.ResFail(c, "用户名不存在")
 		return
 	}
 	//密码验证

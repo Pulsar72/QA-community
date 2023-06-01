@@ -3,7 +3,6 @@ package dao
 import (
 	"QA_community/global"
 	"QA_community/model"
-	"strconv"
 	"strings"
 )
 
@@ -53,12 +52,11 @@ func JudgePassword(password string) bool {
 }
 
 // 验证手机号格式
-func JudgePhoneNumber(phonenumber uint) bool {
-	num := strconv.Itoa(int(phonenumber))
-	if len([]rune(num)) != 11 {
+func JudgePhoneNumber(phonenumber string) bool {
+	if len([]rune(phonenumber)) != 11 {
 		return false
 	}
-	if strings.HasPrefix(num, "1") != true {
+	if strings.HasPrefix(phonenumber, "1") != true {
 		return false
 	}
 	return true
@@ -83,7 +81,7 @@ func JudgeEmail(email string) bool {
 // 若没有这个用户返回 ture，反之返回 false
 func CheckUserName(username string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("username=?", username).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("user_name=?", username).Find(&user)
 	if user.UserName == "" {
 		return true
 	}
@@ -92,10 +90,10 @@ func CheckUserName(username string) bool {
 
 // 检查手机号是否重复
 // 若没有这个手机号返回 ture，反之返回 false
-func CheckPhoneNumber(phonenumber uint) bool {
+func CheckPhoneNumber(phonenumber string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("phonenumber=?", phonenumber).Find(&user)
-	if user.PhoneNumber == 0 {
+	global.GlobalDb.Model(&model.User{}).Where("phone_number=?", phonenumber).Find(&user)
+	if user.PhoneNumber == "" {
 		return true
 	}
 	return false
@@ -115,7 +113,7 @@ func CheckEmail(email string) bool {
 // 密码验证(未完善)
 func PasswordAuth(username string, password string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("username=?", username).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("user_name=?", username).Find(&user)
 	if user.Password == password {
 		return true
 	}
@@ -128,8 +126,8 @@ func GetUsernameFromEmail(email string) string {
 	return user.UserName
 }
 
-func GetUserFromPhoneNumber(phonenumber uint) string {
+func GetUserFromPhoneNumber(phonenumber string) string {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("phonenumber=?", phonenumber).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("phone_number=?", phonenumber).Find(&user)
 	return user.UserName
 }
