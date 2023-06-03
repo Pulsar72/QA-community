@@ -81,7 +81,7 @@ func JudgeEmail(email string) bool {
 // 若没有这个用户返回 ture，反之返回 false
 func CheckUserName(username string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("user_name=?", username).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("username=?", username).Find(&user)
 	if user.UserName == "" {
 		return true
 	}
@@ -92,7 +92,7 @@ func CheckUserName(username string) bool {
 // 若没有这个手机号返回 ture，反之返回 false
 func CheckPhoneNumber(phonenumber string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("phone_number=?", phonenumber).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("phonenumber=?", phonenumber).Find(&user)
 	if user.PhoneNumber == "" {
 		return true
 	}
@@ -113,7 +113,7 @@ func CheckEmail(email string) bool {
 // 密码验证(未完善)
 func PasswordAuth(username string, password string) bool {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("user_name=?", username).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("username=?", username).Find(&user)
 	if user.Password == password {
 		return true
 	}
@@ -128,6 +128,6 @@ func GetUsernameFromEmail(email string) string {
 
 func GetUserFromPhoneNumber(phonenumber string) string {
 	var user model.User
-	global.GlobalDb.Model(&model.User{}).Where("phone_number=?", phonenumber).Find(&user)
+	global.GlobalDb.Model(&model.User{}).Where("phonenumber=?", phonenumber).Find(&user)
 	return user.UserName
 }
