@@ -24,7 +24,7 @@ func InitMysql() {
 	sqlDB.SetMaxIdleConns(100)
 	sqlDB.SetMaxOpenConns(500)
 	global.GlobalDb = db
-	global.GlobalDb.AutoMigrate(&model.User{})
+	global.GlobalDb.AutoMigrate(&model.User{}, &model.Question{}, &model.Answer{})
 
 }
 

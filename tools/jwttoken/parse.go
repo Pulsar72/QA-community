@@ -9,7 +9,7 @@ import (
 
 // 解析Token
 func ParseToken(tokenString string) (*model.MyClaims, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &model.MyClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &model.MyClaims{}, func(token *jwt.Token) (i interface{}, err error) {
 		return global.SecretSignKey, nil
 	})
 	if err != nil {
