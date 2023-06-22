@@ -40,8 +40,9 @@ func AAuthIdentity(username string, id uint) bool {
 	return false
 }
 
-func QModify(content string, id uint) {
+func QModify(content string, title string, id uint) {
 	global.GlobalDb.Model(&model.Question{}).Where("id = ?", id).Update("content", content)
+	global.GlobalDb.Model(&model.Question{}).Where("id = ?", id).Update("title", title)
 
 }
 

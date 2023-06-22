@@ -158,7 +158,7 @@ func ModifyQuestion(c *gin.Context) {
 		checkresponse.ResFail(c, "修改失败,这个问题不属于你")
 		return
 	}
-	dao.QModify(modifyquestion.Content, modifyquestion.ID)
+	dao.QModify(modifyquestion.Content, modifyquestion.Title, modifyquestion.ID)
 	checkresponse.ResSuccess(c, "问题修改成功")
 }
 
